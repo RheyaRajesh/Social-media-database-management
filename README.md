@@ -22,5 +22,3 @@ It’s designed for learning and demonstration purposes — to show how backend 
 
 ---
 
-## 🧱 Project Structure
-
