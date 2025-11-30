@@ -3,7 +3,6 @@ from mysql.connector import Error
 
 def create_database_and_tables():
     try:
-        # Connect to MySQL 
         connection = mysql.connector.connect(
             host='localhost',
             user='root',
@@ -11,11 +10,9 @@ def create_database_and_tables():
         )
         cursor = connection.cursor()
 
-        # Create database
         cursor.execute("CREATE DATABASE IF NOT EXISTS social_media")
         cursor.execute("USE social_media")
 
-        # Create audit_log table
         cursor.execute("""
         CREATE TABLE IF NOT EXISTS audit_log (
             audit_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -26,7 +23,6 @@ def create_database_and_tables():
         )
         """)
 
-        # Create tables with ON DELETE CASCADE
         cursor.execute("""
         CREATE TABLE IF NOT EXISTS users (
             user_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -126,7 +122,6 @@ def create_database_and_tables():
         )
         """)
 
-        # Create triggers for deletions
         cursor.execute("""
         DELIMITER //
         CREATE TRIGGER after_user_delete
@@ -235,7 +230,6 @@ def create_database_and_tables():
         DELIMITER ;
         """)
 
-        # Create stored procedures
         cursor.execute("""
         DELIMITER //
         CREATE PROCEDURE insert_user(
@@ -643,4 +637,5 @@ def create_database_and_tables():
             connection.close()
 
 if __name__ == "__main__":
+
     create_database_and_tables()
